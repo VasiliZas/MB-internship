@@ -11,7 +11,7 @@ import java.util.Optional;
 
 @Service("productService")
 @RequiredArgsConstructor
-public class ProductService {
+public class BillService {
 
     private final ProductRepository productRepository;
 

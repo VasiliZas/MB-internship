@@ -1,7 +1,7 @@
 package io.vasilizas.controller;
 
 
-import io.vasilizas.myservice.ProductService;
+import io.vasilizas.myservice.BillService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -15,7 +15,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 public class SpringController {
 
     @Autowired
-    private ProductService productService;
+    private BillService billService;
 
     @GetMapping("/home")
     public String homePage() {
@@ -25,7 +25,7 @@ public class SpringController {
     @PostMapping("/getbill")
     public String getBill(@RequestParam(value = "product", required = false) String product,
                           @RequestParam(value = "card", required = false) String card) {
-        productService.getBill(product, card);
+        billService.getBill(product, card);
         return "redirect:/home";
     }
 }
