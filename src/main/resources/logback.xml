@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<configuration>
+
+    <!--    <property name="pattern" value="%date{HH:mm:ss.SSS} %-5p %logger{36}-->
+    <!--%X{akkaSource} [%file:%line] - %m%n" />-->
+
+    <!--    <appender name="STDOUT" class="ch.qos.logback.core.ConsoleAppender">-->
+    <!--        <encoder>-->
+    <!--            <pattern>%date{HH:mm:ss.SSS} %-5p %logger{36} %X{akkaSource} [%file:%line] - %m%n</pattern>-->
+    <!--        </encoder>-->
+    <!--    </appender>-->
+
+    <!--    <appender name="abc" class="ch.qos.logback.core.rolling.RollingFileAppender">-->
+    <!--        <file>${catalina.base}/logs/worker.log</file>-->
+    <!--        <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">-->
+    <!--            <fileNamePattern>${catalina.base}/logs/worker-%d{yyyy-MM-dd_HH}.log</fileNamePattern>-->
+    <!--            <maxHistory>100</maxHistory>-->
+    <!--        </rollingPolicy>-->
+    <!--        <encoder>-->
+    <!--            <pattern>${pattern}</pattern>-->
+    <!--        </encoder>-->
+    <!--    </appender>-->
+
+    <!--    <logger name="com.aaa.bbb.ccc" level="DEBUG" additivity="true">-->
+    <!--        <appender-ref ref="abc"/>-->
+    <!--    </logger>-->
+
+    <!--    <root>-->
+    <!--        <level value="DEBUG" />-->
+    <!--        <appender-ref ref="STDOUT" />-->
+    <!--        <appender-ref ref="abc" />-->
+    <!--    </root>-->
+
+    <appender name="CONSOLE" class="ch.qos.logback.core.ConsoleAppender">
+
+        <encoder>
+            <pattern>%msg%n</pattern>
+        </encoder>
+    </appender>
+
+    <root level="INFO">
+        <appender-ref ref="CONSOLE"/>
+    </root>
+</configuration>

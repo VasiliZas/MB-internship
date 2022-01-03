@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang=en>
+<head>
+    <meta charset=UTF-8>
+    <title>Get your products</title>
+    <style>
+        #text {
+            text-align:  center;
+        }
+        #footer {
+            position: fixed;
+            bottom: 0;
+            padding: 2px;
+            color: black;
+            width: 100%;
+        }
+    </style>
+</head>
+<h1 align="center">Get bill </h1>
+<h2 align="center"> Please enter the name of the product and its quantity in 'x-9' format, as well as the number
+ of your discount card. </h2>
+ <h2 align="center"> If there is no discount card, enter "NULL". </h2>
+<form action="/getbill" method=post align="center">
+    <input required name=product placeholder=product type=text> <br/>
+    <input  name=card placeholder=card type=text> <br/>
+    <input type=submit value=Get!> <input type=reset value=Clean>
+</form>
+</body>
+</html>
