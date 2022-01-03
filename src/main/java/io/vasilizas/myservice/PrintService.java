@@ -13,12 +13,9 @@ public class PrintService {
 
     private static final Logger log = LoggerFactory.getLogger(PrintService.class);
 
-    public void printStartAndFinishBill() {
-        log.info("********************************************************************************");
-    }
     public void noProductOrNotEnough() {
-        log.info("--------------------------------------------------------------------------------");
         log.info("There is no such product or its quantity is insufficient.");
+        log.info("--------------------------------------------------------------------------------");
     }
 
     public BigDecimal printBill(Product product, List<Integer> countList, int i) {
@@ -27,8 +24,8 @@ public class PrintService {
         var name = product.getName();
         var count = countList.get(i);
         var total = price.multiply(countForBill);
-        log.info("--------------------------------------------------------------------------------");
         log.info("Your product: {} , price product: {} EUR, count product: {} , total: {} EUR", name, price, count, total);
+        log.info("--------------------------------------------------------------------------------");
         return total;
     }
 

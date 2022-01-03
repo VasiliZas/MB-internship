@@ -52,6 +52,13 @@ public class SpringAopAndAspectAnnotation {
         return result;
     }
 
+    @Around("@annotation(io.vasilizas.myannotation.MyPrintAnnotation)")
+    public void printBeforeAndAfterMethod(ProceedingJoinPoint pjp) throws Throwable {
+        log.info("********************************************************************************");
+        pjp.proceed();
+        log.info("********************************************************************************");
+    }
+
     @Around("@annotation(io.vasilizas.myannotation.MyAopExceptionAnnotation)")
     public ModelAndView catchExceptionAndRedirectToErrorPage(ProceedingJoinPoint pjp) {
         ModelAndView result = new ModelAndView();
