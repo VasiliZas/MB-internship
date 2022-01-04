@@ -14,10 +14,10 @@ import org.springframework.security.oauth2.core.oidc.IdTokenClaimNames;
 
 import static org.springframework.security.config.Customizer.withDefaults;
 
-@Configuration
+//@Configuration
 public class OAuth2LoginConfig {
 
-    @EnableWebSecurity
+    //@EnableWebSecurity
     public static class OAuth2LoginSecurityConfig extends WebSecurityConfigurerAdapter {
 
         @Override
@@ -31,7 +31,7 @@ public class OAuth2LoginConfig {
         }
     }
 
-    @Bean
+   // @Bean
     public ClientRegistrationRepository clientRegistrationRepository() {
         return new InMemoryClientRegistrationRepository(this.googleClientRegistration());
     }
@@ -39,7 +39,7 @@ public class OAuth2LoginConfig {
     private ClientRegistration googleClientRegistration() {
         return ClientRegistration.withRegistrationId("google")
                 .clientId("648775580115-3po9392efl5ijp9is6rjqdsgu6oaen8f.apps.googleusercontent.com")
-                .clientSecret("${clientSecret}")
+                .clientSecret(" ")
                 .clientAuthenticationMethod(ClientAuthenticationMethod.CLIENT_SECRET_BASIC)
                 .authorizationGrantType(AuthorizationGrantType.AUTHORIZATION_CODE)
                .redirectUri("{baseUrl}/home")
