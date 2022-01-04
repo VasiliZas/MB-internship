@@ -9,28 +9,36 @@ import org.springframework.context.annotation.Configuration;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
+import org.springframework.security.oauth2.config.annotation.web.configuration.EnableOAuth2Client;
 
 import java.time.LocalDateTime;
 
 @Configuration
 @EnableWebSecurity
-@EnableOAuth2Sso
+@EnableOAuth2Client
 public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 
     private static final String LOGIN = "/login";
 
     @Override
     protected void configure(HttpSecurity http) throws Exception {
-        http.csrf().disable()
-                .antMatcher("/**")
-                .authorizeRequests()
-                .antMatchers(LOGIN, "/error").permitAll()
+//        http.csrf().disable()
+//                .antMatcher("/**")
+//                .authorizeRequests()
+//                .antMatchers(LOGIN, "/error").permitAll()
+//                .anyRequest().authenticated()
+//                .and().formLogin().loginPage(LOGIN).failureForwardUrl(LOGIN)
+//                .and().oauth2Login()
+//                .defaultSuccessUrl("/home")
+//                .and().logout().logoutSuccessUrl("/").permitAll();
+        http.antMatcher("/**")
+        .authorizeRequests()
                 .anyRequest().authenticated()
-                .and().formLogin().loginPage(LOGIN).failureForwardUrl(LOGIN)
-                .defaultSuccessUrl("/home")
-                .and().logout().logoutSuccessUrl("/").permitAll();
+                .and()
+                .oauth2Login().defaultSuccessUrl("/home")
+                .and().logout().logoutSuccessUrl("/").permitAll()
+                .and().csrf().disable();
     }
-
 
     @Bean
     public PrincipalExtractor principalExtractor(UserRepository userRepository) {
