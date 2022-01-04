@@ -38,4 +38,5 @@ public class Product extends MyAbstractProduct {
     public String toString() {
         return "Product {} " + super.toString();
     }
+
 }
