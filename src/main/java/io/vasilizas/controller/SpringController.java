@@ -17,7 +17,6 @@ import java.time.LocalDateTime;
 
 @Slf4j
 @Controller
-
 public class SpringController {
 
     @Autowired
