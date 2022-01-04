@@ -17,6 +17,11 @@ public class SpringController {
     @Autowired
     private BillService billService;
 
+    @GetMapping("/")
+    public String startPage() {
+        return "start";
+    }
+
     @GetMapping("/home")
     public String homePage() {
         return "index";
