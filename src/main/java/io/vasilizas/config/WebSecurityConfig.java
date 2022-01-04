@@ -2,6 +2,7 @@ package io.vasilizas.config;
 
 import io.vasilizas.bean.db.User;
 import io.vasilizas.repositories.jpa.UserRepository;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.autoconfigure.security.oauth2.resource.PrincipalExtractor;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -18,12 +19,12 @@ import java.time.LocalDateTime;
 public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 
     @Override
-    protected void configure(HttpSecurity http) throws Exception {
+    protected void configure(final HttpSecurity http) throws Exception {
         http.antMatcher("/**")
-                .authorizeRequests()
-                .anyRequest().authenticated()
-                .and().oauth2Login().defaultSuccessUrl("/home")
-                .and().logout().logoutSuccessUrl("/").permitAll()
+                .authorizeRequests().anyRequest().authenticated()
+                .and().oauth2Login().defaultSuccessUrl("/getclientinfo").failureUrl("/")
+                .and().logout().logoutUrl("/logout").logoutSuccessUrl("/").invalidateHttpSession(true)
+                .deleteCookies("JSESSIONID").permitAll()
                 .and().csrf().disable();
     }
 
