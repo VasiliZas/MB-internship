@@ -9,13 +9,11 @@ import org.springframework.context.annotation.Configuration;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
-import org.springframework.security.oauth2.config.annotation.web.configuration.EnableOAuth2Client;
 
 import java.time.LocalDateTime;
 
 @Configuration
 @EnableWebSecurity
-@EnableOAuth2Client
 public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 
     @Override
@@ -29,7 +27,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
     }
 
     @Bean
-    public PrincipalExtractor principalExtractor(UserRepository userRepository) {
+    public PrincipalExtractor principalExtractor(@Autowired UserRepository userRepository) {
         return map -> {
             String id = (String) map.get("sub");
             User user = userRepository.findById(id).orElseGet(() -> {

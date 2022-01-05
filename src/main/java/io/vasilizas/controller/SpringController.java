@@ -26,17 +26,17 @@ public class SpringController {
 
     @GetMapping("/getclientinfo")
     public String getClientInfo(@RegisteredOAuth2AuthorizedClient("google") OAuth2AuthorizedClient user) {
-
         var clientRegistration = user.getClientRegistration();
-        if (clientRepository.findById(clientRegistration.getClientId()).isEmpty()) {
+        var myClient = clientRepository.findById(clientRegistration.getClientId()).orElseGet(() -> {
             MyClient client = new MyClient();
             client.setId(clientRegistration.getClientId());
             client.setName(clientRegistration.getClientName());
             client.setRedirectUri(clientRegistration.getRedirectUri());
             client.setClientSecret(clientRegistration.getClientSecret());
-            client.setLastVisit(LocalDateTime.now());
-            clientRepository.save(client);
-        }
+            return client;
+        });
+        myClient.setLastVisit(LocalDateTime.now());
+        clientRepository.save(myClient);
         return "redirect:/home";
     }
 
