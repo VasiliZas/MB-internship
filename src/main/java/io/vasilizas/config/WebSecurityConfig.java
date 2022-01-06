@@ -18,12 +18,17 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 
     @Override
     protected void configure(final HttpSecurity http) throws Exception {
-        http.antMatcher("/**")
-                .authorizeRequests().anyRequest().authenticated()
-                .and().oauth2Login().defaultSuccessUrl("/getclientinfo").failureUrl("/")
-                .and().logout().logoutUrl("/logout").logoutSuccessUrl("/").invalidateHttpSession(true)
-                .deleteCookies("JSESSIONID").permitAll()
-                .and().csrf().disable();
+//        http
+//                .authorizeRequests().antMatchers("/", "/error", "/login**").permitAll()
+//                .anyRequest().authenticated()
+//                .and().oauth2Login().defaultSuccessUrl("/getclientinfo").failureUrl("/")
+//                .and().logout().logoutUrl("/logout").logoutSuccessUrl("/").invalidateHttpSession(true)
+//                .deleteCookies("JSESSIONID").permitAll()
+//                .and().csrf().disable();
+        http.authorizeRequests()
+                .anyRequest().authenticated()
+                .and()
+                .oauth2Login();
     }
 
     @Bean
