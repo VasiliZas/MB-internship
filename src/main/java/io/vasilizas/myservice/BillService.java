@@ -33,7 +33,9 @@ public class BillService {
             if (productService.checkProductAndCount(product, countList, i)) {
                 printService.noProductOrNotEnough();
             } else {
-                var total = printService.printBill(product.orElseThrow(), countList, i);
+                var productGet = product.orElseThrow();
+                var total = printService.printBill(productGet, countList, i);
+                productService.setCountProduct(productGet, countList, i, productRepository);
                 bill = bill.add(total);
             }
         }
