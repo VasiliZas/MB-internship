@@ -56,6 +56,8 @@ public class SpringController {
 
     @GetMapping("/loginSuccess")
     public String getLoginInfo(OAuth2AuthenticationToken authentication) {
+
+
         OAuth2AuthorizedClient client = authorizedClientService
                 .loadAuthorizedClient(
                         authentication.getAuthorizedClientRegistrationId(),
@@ -65,12 +67,16 @@ public class SpringController {
 
         if (!isEmpty(userInfoEndpointUri)) {
             RestTemplate restTemplate = new RestTemplate();
+
             HttpHeaders headers = new HttpHeaders();
             headers.add(HttpHeaders.AUTHORIZATION, "Bearer " + client.getAccessToken()
                     .getTokenValue());
+
             HttpEntity entity = new HttpEntity("", headers);
             ResponseEntity<Map> response = restTemplate.exchange(userInfoEndpointUri, HttpMethod.GET, entity, Map.class);
+
             Map userAttributes = response.getBody();
+
             String id = (String) userAttributes.get("sub");
             User user = userRepository.findById(id).orElseGet(() -> {
                 User newUser = new User();
